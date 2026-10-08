@@ -12,7 +12,9 @@ ATtiny1616とRS485トランシーバ（H485EIDQ）を13×22mmの基板に載せ�
 - **通信**: RS485（半二重）
 - **設計ツール**: EasyEDA Pro
 
-<!-- TODO: 基板写真を docs/images/ に置いて貼る -->
+![ATtiny1616 RS485 Module](docs/images/board.jpg)
+
+*左：組み立て済みの基板。右：UPDIライタにつないで書き込んでいるところ*
 
 ## ハードウェア仕様
 
