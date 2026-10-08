@@ -4,7 +4,11 @@ ATtiny1616マイコンとRS485トランシーバを搭載した小型の基板�
 
 ## 概要
 
-- **MCU**: ATtiny1616（tinyAVR 1-series）
+ATtiny1616とRS485トランシーバ（H485EIDQ）を13×22mmの基板に載せたモジュールです。
+4ピンのJST SHコネクタを2つ備えていて、RS485バス上に何台でも数珠つなぎにできます。
+空いているGPIOはすべて2.54mmピッチのピンヘッダに出してあります。
+
+- **MCU**: ATtiny1616-MNR（QFN-20、tinyAVR 1-series）
 - **通信**: RS485（半二重）
 - **設計ツール**: EasyEDA Pro
 
@@ -14,28 +18,64 @@ ATtiny1616マイコンとRS485トランシーバを搭載した小型の基板�
 
 | 項目 | 内容 |
 |---|---|
-| MCU | ATtiny1616 |
-| RS485トランシーバ | TODO |
-| 電源電圧 | TODO |
-| 基板サイズ | TODO |
-| コネクタ | TODO |
-| 書込み | UPDI |
+| MCU | ATtiny1616-MNR |
+| RS485トランシーバ | H485EIDQ/TR（DFN-8） |
+| 終端抵抗 | 120Ω（R6、AとBの間に常時接続） |
+| 基板サイズ | 約13.2×21.8mm |
+| RS485コネクタ | JST SM04B-SRSS-TB（SH 1.0mm 4ピン）×2（U6・U11） |
+| 書込みコネクタ | JST SM03B-SRSS-TB（SH 1.0mm 3ピン、UPDI）（U9） |
+| GPIO | 2.54mmピッチ 8ピンヘッダ×2（H1・H2） |
+| 状態LED | PB0（1kΩ経由） |
 
-### ピンアサイン
+### MCUのピン割り当て
 
-| ATtiny1616ピン | 機能 |
+| ATtiny1616 | 機能 |
 |---|---|
-| TODO | RS485 TX |
-| TODO | RS485 RX |
-| TODO | RS485 DE/RE |
+| PB2（TXD） | RS485 DI（送信） |
+| PB3（RXD） | RS485 RO（受信） |
+| PB4 | RS485 DE / RE#（送信イネーブル。Highで送信） |
+| PB0 | LED |
 | PA0 | UPDI |
+
+RS485にはUSART0のデフォルトピン（PB2/PB3）を使っています。
+
+### コネクタ
+
+**RS485（U6・U11、2つとも同じピン配置）**
+
+| ピン | 信号 |
+|---|---|
+| 1 | VCC |
+| 2 | A |
+| 3 | B |
+| 4 | GND |
+
+**UPDI（U9）**
+
+| ピン | 信号 |
+|---|---|
+| 1 | UPDI |
+| 2 | GND |
+| 3 | VCC |
+
+**H1**
+
+| ピン | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|
+| 信号 | GND | VCC | PA4 | PA5 | PA6 | PA7 | PB5 | PB1 |
+
+**H2**
+
+| ピン | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|
+| 信号 | PA3 | PA2 | PA1 | UPDI | PC3 | PC2 | PC1 | PC0 |
 
 ## リポジトリ構成
 
 ```
 hardware/
   schematic/   回路図（PDF）
-  pcb/         EasyEDA Proプロジェクト（.eprj2）、PCB図面
+  pcb/         EasyEDA Proプロジェクト（.epro2）、PCB図面
   gerber/      製造用Gerberファイル
   bom/         部品表（BOM）、部品配置（CPL）
   3d/          3Dモデル（STEP）
@@ -43,16 +83,18 @@ firmware/      サンプルファームウェア
 docs/          ドキュメント、写真
 ```
 
-## EasyEDA Proからエクスポートするファイル
+## 基板データ
 
-| ファイル | エクスポート先 |
+| ファイル | 置き場所 |
 |---|---|
 | 回路図PDF | `hardware/schematic/` |
 | PCB図面PDF | `hardware/pcb/` |
-| プロジェクト（.eprj2） | `hardware/pcb/` |
+| EasyEDA Proプロジェクト（.epro2） | `hardware/pcb/` |
 | Gerber（zip） | `hardware/gerber/` |
-| BOM / ピック＆プレース（CPL） | `hardware/bom/` |
+| BOM（xlsx） | `hardware/bom/` |
 | 3Dモデル（STEP） | `hardware/3d/` |
+
+.epro2は、EasyEDA Proの「ファイル → インポート」で開けます。
 
 ## 使用例
 
