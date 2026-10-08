@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# PlatformIO / VSCode
+.pio/
+.vscode/
+
+# EasyEDA backups
+*.bak
+*.backup
