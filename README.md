@@ -60,6 +60,12 @@ docs/          ドキュメント、写真
 
 - [KER_TLE_V3_Module](https://github.com/NaohiroIIDA/KER_TLE_V3_Module)：TLE5012B磁気角度センサーモジュール
 
+## ライセンス
+
+[MIT License](LICENSE)
+
+回路図・基板データ・ファームウェアを含め、このリポジトリのすべてのファイルが対象です。著作権表示を残せば、商用・非商用を問わず自由に使用・改変・再配布できます。
+
 ## 作者
 
 Naohiro IIDA
